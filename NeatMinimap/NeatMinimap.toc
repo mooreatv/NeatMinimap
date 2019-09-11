@@ -1,0 +1,12 @@
+## Interface: 80200
+## Title: Neat Minimap
+## Notes: Neat Minimap auto hides/shows button as needed (|cFF99E5FF/nmm|r)
+## Author: MooreaTV moorea@ymail.com
+## Version: @project-version@
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: NeatMinimapSaved
+## Globe: check-classic
+MoLib/MoLib.lua
+MoLib/MoLibUI.lua
+NeatMinimap.lua

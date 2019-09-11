@@ -1,0 +1,9 @@
+ChangeLog for NeatMinimap by MooreaTv (moorea@ymail.com)
+
+Coming next:
+- Your input/suggestions welcome !
+- See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues)
+
+v0.01.00 Seot 10th 2019
+- initial version, created from MooreaTv/WowAddonTemplate
+./newaddon.sh 'NeatMinimap' 'NMM' 'Neat Minimap' 'NEATMINIMAP' 'nmm' 'Neat Minimap auto hides/shows button as needed'
