@@ -161,9 +161,10 @@ function NMM:UpdateButtons()
     if NMM.exclude[name] or not b.Hide then
       self:Debug("Skipping % %", name, b.Hide)
     else
-      if not name then
+      name = name or b.name
+      if not name and not b.icon then
         self:Debug("Skipping unamed frame/button")
-      elseif NMM:StartsWith(name, "QuestieFrame") then
+      elseif name and NMM:StartsWith(name, "QuestieFrame") then
         self:Debug(4, "Skipping QuestieFrames %", name)
       else
         self:Debug("Adding %", name)
