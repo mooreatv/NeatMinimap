@@ -27,6 +27,133 @@ NMM.slashCmdName = "nmm"
 NMM.addonHash = "@project-abbreviated-hash@"
 NMM.savedVarName = "NeatMinimapSaved"
 
+-- Defaults
+NMM.doClock = false
+NMM.doNight = true
+NMM.delay = 2
+
+NMM.buttons = {}
+
+NMM.buttonsShown = true
+
+function NMM:ShowButtons()
+  if NMM.buttonsShown then
+    NMM:Debug(5, "Already shown buttons")
+    return
+  end
+  NMM:Debug("Showing buttons")
+  for _, b in ipairs(NMM.buttons) do
+    b:Show()
+  end
+  NMM.buttonsShown = true
+  NMM:CancelCheck("showing buttons")
+end
+
+function NMM:HideButtons()
+  if not NMM.buttonsShown then
+    NMM:Debug(5, "Already hidden buttons")
+    return
+  end
+  NMM:Debug("Hiding buttons")
+  for _, b in ipairs(NMM.buttons) do
+    b:Hide()
+  end
+  NMM.buttonsShown = false
+end
+
+function NMM:IsCursorInside(f)
+  local l, b, w, h = f:GetRect()
+  local s = f:GetEffectiveScale() or 1
+  local x1 = l * s
+  local x2 = (l + w) * s
+  local y1 = b * s
+  local y2 = (b + h) * s
+  local x, y = GetCursorPosition()
+  local isIn = (x >= x1) and (x <= x2) and (y >= y1) and (y <= y2)
+  self:Debug(2, "ISIN % cursor x % y % - scale %, rect % % dimension % x %", isIn, x, y, s, l, b, w, h)
+  return isIn
+end
+
+function NMM:HasAncestor(child, parent)
+  if not child then
+    self:Debug("Not ancestor")
+    return false
+  end
+  local p = child:GetParent()
+  self:Debug("Checking % % %", child, p, parent)
+  return p == parent or self:HasAncestor(p, parent)
+end
+
+function NMM:CancelCheck(msg)
+  if self.timer then
+    self:Debug(4, "cancelling previous timer " .. msg)
+    self.timer:Cancel()
+    self.timer = nil
+  end
+end
+
+function NMM:ScheduleNextCheck()
+  self:CancelCheck("scheduling next one")
+  local delay = self.delay
+  if delay <= 0 then
+    delay = 0.1
+  end
+  self:Debug(5, "scheduling in %s", delay)
+  self.timer = C_Timer.NewTimer(delay, function()
+    self.timer = nil
+    self:Check()
+  end)
+end
+
+function NMM:Check()
+  if NMM:IsCursorInside(NMM.minimapframe) then
+    NMM:ShowButtons()
+    NMM:ScheduleNextCheck()
+    return
+  end
+  NMM:HideButtons()
+end
+
+function NMM:SetupMouseInOut()
+  NMM.buttons = {MinimapZoomOut, MinimapZoomIn}
+  if NMM.doNight then
+    table.insert(NMM.buttons, GameTimeFrame)
+  end
+  local name = "NeatMinimapFrame"
+  local f = NMM.minimapframe or NMM:Frame(name, name, nil, Minimap)
+  NMM.minimapframe = f
+  f:ClearAllPoints()
+  local border = 25
+  f:SetPoint("BOTTOMLEFT", -border, -border)
+  f:SetPoint("TOPRIGHT", border, border)
+  f:SetFrameStrata("BACKGROUND")
+  f:EnableMouse(false)
+  -- f:Show()
+  f:SetScript("OnEnter", function()
+    NMM:ShowButtons()
+  end)
+  f:SetScript("OnLeave", function()
+    NMM:ScheduleNextCheck()
+  end)
+  Minimap:HookScript("OnEnter", function()
+    NMM:ShowButtons()
+  end)
+  Minimap:HookScript("OnLeave", function()
+    NMM:ScheduleNextCheck()
+  end)
+  if false then
+    for _, b in ipairs(NMM.buttons) do
+      b:HookScript("OnEnter", function()
+        NMM:ShowButtons()
+      end)
+      b:HookScript("OnLeave", function()
+        NMM:HideButtons()
+      end)
+    end
+  end
+  NMM:ScheduleNextCheck()
+end
+
 -- Events handling
 
 -- define NMM:AfterSavedVars() for post saved var loaded processing
@@ -36,6 +163,7 @@ local additionalEventHandlers = {
   PLAYER_ENTERING_WORLD = function(_self, ...)
     NMM:Debug("OnPlayerEnteringWorld " .. NMM:Dump(...))
     NMM:CreateOptionsPanel()
+    NMM:SetupMouseInOut()
   end,
 
   DISPLAY_SIZE_CHANGED = function(_self)
@@ -127,8 +255,15 @@ function NMM:CreateOptionsPanel()
   local doNight = p:addCheckBox(L["Also hide/show Day/Night indicator"],
                                 L["Whether the Blizzard Day/Night indicator should also be hidden/shown"]):Place(4, 20)
 
-  local delay = p:addSlider(L["Shown delay"], L["How long to show the button after mousing out of the map area"],
-                                  2, 10, 1, L["1 sec"], L["5 sec"]):Place(16, 30)
+  local delaySlider = p:addSlider(L["Show delay"], L["How long to show the button after mousing out of the map area"],
+                                  0, 3, 0.5, L["No delay"], L["3 sec"], {
+    ["0"] = L["none"],
+    ["0.5"] = "1/2 s",
+    [1] = "1 s",
+    ["1.5"] = "1 1/2 s",
+    [2] = "2 s",
+    ["2.5"] = "2 1/2 s"
+  }):Place(16, 30)
 
   p:addText(L["Development, troubleshooting and advanced options:"]):Place(40, 20)
 
@@ -153,6 +288,10 @@ function NMM:CreateOptionsPanel()
   function p:HandleRefresh()
     p:Init()
     debugLevel:SetValue(NMM.debug or 0)
+    doClock:SetChecked(NMM.doClock)
+    doNight:SetChecked(NMM.doNight)
+    delaySlider:SetValue(NMM.delay)
+    NMM:ShowButtons()
   end
 
   function p:HandleOk()
@@ -174,6 +313,11 @@ function NMM:CreateOptionsPanel()
       end
     end
     NMM:SetSaved("debug", sliderVal)
+    NMM:SetSaved("doClock", doClock:GetChecked())
+    NMM:SetSaved("doNight", doNight:GetChecked())
+    NMM:SetSaved("delay", delaySlider:GetValue())
+    NMM:SetupMouseInOut()
+    NMM:ScheduleNextCheck()
   end
 
   function p:cancel()
@@ -195,11 +339,6 @@ function NMM:CreateOptionsPanel()
   -- Add the panel to the Interface Options
   InterfaceOptions_AddCategory(NMM.optionsPanel)
 end
-
--- bindings / localization
-_G.NEATMINIMAP = "NeatMinimap"
-_G.BINDING_HEADER_NMM = L["Neat Minimap addon key bindings"]
-_G.BINDING_NAME_NMM_SOMETHING = L["TODO something"] .. " |cFF99E5FF/nmm todo|r"
 
 -- NMM.debug = 2
 NMM:Debug("nmm main file loaded")
