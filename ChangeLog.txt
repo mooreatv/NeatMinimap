@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.03.02 Sept 11th 2019
+- Handle resize and (my own!) wiped buttons properly this time.
+  should probably not wipe buttons in the first place...
 v1.03.01 Sept 11th 2019
 - Fixed some typos in description
 v1.03.00 Sept 11th 2019

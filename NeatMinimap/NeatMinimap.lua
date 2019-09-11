@@ -45,7 +45,7 @@ function NMM:ShowButtons(force)
   NMM:Debug("Showing buttons - force %", force)
   for _, b in ipairs(NMM.buttons) do
     if b and b.Show then
-      b:Show()
+      pcall(b.Show, b) -- can fail on wiped buttons
     end
   end
   NMM.buttonsShown = true
@@ -60,7 +60,7 @@ function NMM:HideButtons(force)
   NMM:Debug("Hiding buttons - force %", force)
   for _, b in ipairs(NMM.buttons) do
     if b and b.Hide then
-      b:Hide()
+      pcall(b.Hide, b)
     end
   end
   NMM.buttonsShown = false
@@ -143,12 +143,12 @@ NMM.exclude = {
   ["MMHolder"] = true,
   ["HelpOpenWebTicketButton"] = true,
   ["HelpOpenTicketButton"] = true,
-  ["TopMiniPanel"] = true,
+  ["TopMiniPanel"] = true
 }
 
 function NMM:UpdateButtons()
   -- ElvUI for instance hides these buttons already, don't show them back:
-  if (NMM.buttons and NMM.buttons[1]==_G.MinimapZoomOut) or _G.MinimapZoomOut:IsVisible() then
+  if (NMM.buttons and NMM.buttons[1] == _G.MinimapZoomOut) or _G.MinimapZoomOut:IsVisible() then
     NMM.buttons = {_G.MinimapZoomOut, _G.MinimapZoomIn}
     if _G.MiniMapTracking then -- bfa search button
       table.insert(NMM.buttons, _G.MiniMapTracking)
@@ -157,7 +157,7 @@ function NMM:UpdateButtons()
       table.insert(NMM.buttons, _G.GarrisonLandingPageMinimapButton)
     end
     if NMM.doNight then
-     table.insert(NMM.buttons, _G.GameTimeFrame)
+      table.insert(NMM.buttons, _G.GameTimeFrame)
     end
   else
     NMM.buttons = {}
@@ -221,7 +221,7 @@ local additionalEventHandlers = {
     NMM:CreateOptionsPanel()
     NMM:SetupMouseInOut()
     -- addons might add their buttons after us
-    C_Timer.After(3, function()
+    C_Timer.After(5, function()
       NMM:SetupMouseInOut()
     end)
   end,
@@ -231,8 +231,17 @@ local additionalEventHandlers = {
 
   UI_SCALE_CHANGED = function(_self, ...)
     NMM:DebugEvCall(1, ...)
+    if NMM.resetTimer then
+      NMM:Debug(4, "cancelling previous reset timer")
+      NMM.resetTimer:Cancel()
+    end
+    local delay = 1
+    NMM:Debug(5, "scheduling reset in %s", delay)
+    NMM.resetTimer = C_Timer.NewTimer(delay, function()
+      NMM.resetTimer = nil
+      NMM:SetupMouseInOut()
+    end)
   end
-
 }
 
 NMM:RegisterEventHandlers(additionalEventHandlers)
@@ -316,7 +325,8 @@ function NMM:CreateOptionsPanel()
                                 L["Whether the Blizzard Day/Night indicator should also be hidden/shown"]):Place(4, 20)
 
   local doGarrison = p:addCheckBox(L["Also hide/show Mission indicator"],
-                                L["Whether the Blizzard Garrison/Mission/Faction indicator should also be hidden/shown"]):Place(4, 20)
+                                   L["Whether the Blizzard Garrison/Mission/Faction indicator should also be hidden/shown"])
+                       :Place(4, 20)
 
   local delaySlider = p:addSlider(L["Show delay"], L["How long to show the button after mousing out of the map area"],
                                   0, 3, 0.5, L["No delay"], L["3 sec"], {
