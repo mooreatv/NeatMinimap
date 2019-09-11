@@ -127,20 +127,33 @@ function NMM:Check()
 end
 
 NMM.exclude = {
+  -- Our own frame
   ["NeatMinimapFrame"] = true,
+  -- Std blizz stuff
   ["MiniMapMailFrame"] = true,
   ["MiniMapTrackingFrame"] = true,
   ["MiniMapBattlefieldFrame"] = true,
   ["MinimapBorder"] = true,
   ["MinimapBackdrop"] = true,
+  -- SexyMap
   ["SexyMapCustomBackdrop"] = true,
-  ["SexyMapPingFrame"] = true
+  ["SexyMapPingFrame"] = true,
+  -- ElvUI
+  ["MMHolder"] = true,
+  ["HelpOpenWebTicketButton"] = true,
+  ["HelpOpenTicketButton"] = true,
+  ["TopMiniPanel"] = true,
 }
 
 function NMM:UpdateButtons()
-  NMM.buttons = {_G.MinimapZoomOut, _G.MinimapZoomIn}
-  if NMM.doNight then
-    table.insert(NMM.buttons, _G.GameTimeFrame)
+  -- ElvUI for instance hides these buttons already, don't show them back:
+  if (NMM.buttons and NMM.buttons[1]==_G.MinimapZoomOut) or _G.MinimapZoomOut:IsVisible() then
+    NMM.buttons = {_G.MinimapZoomOut, _G.MinimapZoomIn}
+    if NMM.doNight then
+     table.insert(NMM.buttons, _G.GameTimeFrame)
+    end
+  else
+    NMM.buttons = {}
   end
   NMM.exclude["TimeManagerClockButton"] = not NMM.doClock
   for _, b in ipairs({Minimap:GetChildren()}) do
@@ -148,7 +161,9 @@ function NMM:UpdateButtons()
     if NMM.exclude[name] or not b.Hide then
       self:Debug("Skipping % %", name, b.Hide)
     else
-      if name and NMM:StartsWith(name, "QuestieFrame") then
+      if not name then
+        self:Debug("Skipping unamed frame/button")
+      elseif NMM:StartsWith(name, "QuestieFrame") then
         self:Debug(4, "Skipping QuestieFrames %", name)
       else
         self:Debug("Adding %", name)

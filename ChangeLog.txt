@@ -4,6 +4,8 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues)
 
+v1.02.00 Sept 11th 2019
+- Work properly with ElvUI (don't show back hidden buttons) (Fixes #1)
 v1.01.00 Sept 11th 2019
 - Handle Questie frames
 - Handle (wiped) frames without Hide/Show
