@@ -2,7 +2,7 @@ ChangeLog for NeatMinimap by MooreaTv (moorea@ymail.com)
 
 Coming next:
 - Your input/suggestions welcome !
-- See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues)
+- See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
 v1.03.00 Sept 11th 2019
 - For BfA hide the tracking/search button too
