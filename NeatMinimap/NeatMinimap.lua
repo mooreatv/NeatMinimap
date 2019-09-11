@@ -3,7 +3,7 @@
    Licensed under LGPLv3 - No Warranty
    (contact the author if you need a different license)
 
-   Neat Minimap auto hides/shows button as needed
+   Neat Minimap auto hides/shows buttons and clutter as needed
 
    Get this addon binary release using curse/twitch client or on wowinterface
    The source of the addon resides on https://github.com/mooreatv/NeatMinimap
@@ -306,7 +306,7 @@ function NMM:CreateOptionsPanel()
   local p = NMM:Frame(L["NeatMinimap"])
   NMM.optionsPanel = p
   p:addText(L["NeatMinimap options"], "GameFontNormalLarge"):Place()
-  p:addText(L["Neat Minimap auto hides/shows button as needed"]):Place()
+  p:addText(L["Neat Minimap auto hides/shows buttons and clutter as needed"]):Place()
   p:addText(L["These options let you control the behavior of NeatMinimap"] .. " " .. NMM.manifestVersion ..
               " @project-abbreviated-hash@"):Place()
 
