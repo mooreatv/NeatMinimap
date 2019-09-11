@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues)
 
+v1.01.00 Sept 11th 2019
+- Handle Questie frames
+- Handle (wiped) frames without Hide/Show
 v1.00.00 Sept 10th 2019
 - First fully working version!
 v0.02.00 Sept 10th 2019

@@ -43,7 +43,9 @@ function NMM:ShowButtons(force)
   end
   NMM:Debug("Showing buttons - force %", force)
   for _, b in ipairs(NMM.buttons) do
-    b:Show()
+    if b and b.Show then
+      b:Show()
+    end
   end
   NMM.buttonsShown = true
   NMM:CancelCheck("showing buttons")
@@ -56,7 +58,9 @@ function NMM:HideButtons(force)
   end
   NMM:Debug("Hiding buttons - force %", force)
   for _, b in ipairs(NMM.buttons) do
-    b:Hide()
+    if b and b.Hide then
+      b:Hide()
+    end
   end
   NMM.buttonsShown = false
 end
@@ -141,11 +145,15 @@ function NMM:UpdateButtons()
   NMM.exclude["TimeManagerClockButton"] = not NMM.doClock
   for _, b in ipairs({Minimap:GetChildren()}) do
     local name = b:GetName()
-    if NMM.exclude[name] then
-      self:Debug("Skipping %", name)
+    if NMM.exclude[name] or not b.Hide then
+      self:Debug("Skipping % %", name, b.Hide)
     else
-      self:Debug("Adding %", name)
-      table.insert(NMM.buttons, b)
+      if name and NMM:StartsWith(name, "QuestieFrame") then
+        self:Debug(4, "Skipping QuestieFrames %", name)
+      else
+        self:Debug("Adding %", name)
+        table.insert(NMM.buttons, b)
+      end
     end
   end
 end
