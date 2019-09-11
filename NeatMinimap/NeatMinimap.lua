@@ -328,8 +328,9 @@ function NMM:CreateOptionsPanel()
                                    L["Whether the Blizzard Garrison/Mission/Faction indicator should also be hidden/shown"])
                        :Place(4, 20)
 
-  local delaySlider = p:addSlider(L["Show delay"], L["How long to show the button after mousing out of the map area"],
-                                  0, 3, 0.5, L["No delay"], L["3 sec"], {
+  local delaySlider = p:addSlider(L["Hide delay"],
+                                  L["How long to continue to show the button after mousing out of the map area"], 0, 3,
+                                  0.5, L["No delay"], L["3 sec"], {
     ["0"] = L["none"],
     ["0.5"] = L["0.5 s"],
     [1] = L["1 s"],
