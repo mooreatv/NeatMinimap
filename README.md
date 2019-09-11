@@ -1,5 +1,5 @@
 # Neat Minimap
-Neat Minimap auto hides/shows button as needed
+Neat Minimap auto hides/shows buttons and clutter as needed
 
 ## More information
 
