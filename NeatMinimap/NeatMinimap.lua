@@ -30,6 +30,7 @@ NMM.savedVarName = "NeatMinimapSaved"
 -- Defaults
 NMM.doClock = false
 NMM.doNight = true
+NMM.doGarrison = false
 NMM.delay = 0.5
 
 NMM.buttons = {}
@@ -149,6 +150,12 @@ function NMM:UpdateButtons()
   -- ElvUI for instance hides these buttons already, don't show them back:
   if (NMM.buttons and NMM.buttons[1]==_G.MinimapZoomOut) or _G.MinimapZoomOut:IsVisible() then
     NMM.buttons = {_G.MinimapZoomOut, _G.MinimapZoomIn}
+    if _G.MiniMapTracking then -- bfa search button
+      table.insert(NMM.buttons, _G.MiniMapTracking)
+    end
+    if _G.GarrisonLandingPageMinimapButton and NMM.doGarrison then
+      table.insert(NMM.buttons, _G.GarrisonLandingPageMinimapButton)
+    end
     if NMM.doNight then
      table.insert(NMM.buttons, _G.GameTimeFrame)
     end
@@ -166,6 +173,8 @@ function NMM:UpdateButtons()
         self:Debug("Skipping unamed frame/button")
       elseif name and NMM:StartsWith(name, "QuestieFrame") then
         self:Debug(4, "Skipping QuestieFrames %", name)
+      elseif name and NMM:StartsWith(name, "HandyNotes") then
+        self:Debug(4, "Skipping HandyNotesPins %", name)
       else
         self:Debug("Adding %", name)
         table.insert(NMM.buttons, b)
@@ -306,6 +315,9 @@ function NMM:CreateOptionsPanel()
   local doNight = p:addCheckBox(L["Also hide/show Day/Night indicator"],
                                 L["Whether the Blizzard Day/Night indicator should also be hidden/shown"]):Place(4, 20)
 
+  local doGarrison = p:addCheckBox(L["Also hide/show Mission indicator"],
+                                L["Whether the Blizzard Garrison/Mission/Faction indicator should also be hidden/shown"]):Place(4, 20)
+
   local delaySlider = p:addSlider(L["Show delay"], L["How long to show the button after mousing out of the map area"],
                                   0, 3, 0.5, L["No delay"], L["3 sec"], {
     ["0"] = L["none"],
@@ -341,6 +353,7 @@ function NMM:CreateOptionsPanel()
     debugLevel:SetValue(NMM.debug or 0)
     doClock:SetChecked(NMM.doClock)
     doNight:SetChecked(NMM.doNight)
+    doGarrison:SetChecked(NMM.doGarrison)
     delaySlider:SetValue(NMM.delay)
     NMM:ShowButtons()
   end
@@ -366,6 +379,7 @@ function NMM:CreateOptionsPanel()
     NMM:SetSaved("debug", sliderVal)
     NMM:SetSaved("doClock", doClock:GetChecked())
     NMM:SetSaved("doNight", doNight:GetChecked())
+    NMM:SetSaved("doGarrison", doGarrison:GetChecked())
     NMM:SetSaved("delay", delaySlider:GetValue())
     NMM:SetupMouseInOut()
     NMM:ScheduleNextCheck()
