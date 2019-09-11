@@ -5,7 +5,7 @@ Coming next:
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
 v1.03.03 Sept 11th 2019
-- WIP, for now:
+- Fixes for ElvUI and BfA showing extra buttons/frames (Fixes #2)
 - Tweaks to options menu
 v1.03.02 Sept 11th 2019
 - Handle resize and (my own!) wiped buttons properly this time.

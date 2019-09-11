@@ -136,6 +136,10 @@ NMM.exclude = {
   ["MiniMapBattlefieldFrame"] = true,
   ["MinimapBorder"] = true,
   ["MinimapBackdrop"] = true,
+  ["MiniMapInstanceDifficulty"] = true, -- bfa
+  ["GuildInstanceDifficulty"] = true,
+  ["MiniMapChallengeMode"] = true,
+  ["GameTimeFrame"] = true, -- handled through config, ElvUI (or bfa?) reparents it
   -- SexyMap
   ["SexyMapCustomBackdrop"] = true,
   ["SexyMapPingFrame"] = true,
@@ -149,6 +153,7 @@ NMM.exclude = {
 function NMM:UpdateButtons()
   -- ElvUI for instance hides these buttons already, don't show them back:
   if (NMM.buttons and NMM.buttons[1] == _G.MinimapZoomOut) or _G.MinimapZoomOut:IsVisible() then
+    self:Debug("Not ElvUI case")
     NMM.buttons = {_G.MinimapZoomOut, _G.MinimapZoomIn}
     if _G.MiniMapTracking then -- bfa search button
       table.insert(NMM.buttons, _G.MiniMapTracking)
@@ -157,9 +162,11 @@ function NMM:UpdateButtons()
       table.insert(NMM.buttons, _G.GarrisonLandingPageMinimapButton)
     end
     if NMM.doNight then
+      self:Debug("Adding GameTimeFrame per config")
       table.insert(NMM.buttons, _G.GameTimeFrame)
     end
   else
+    self:Debug("ElvUI case, we'll start with fewer managed buttons")
     NMM.buttons = {}
   end
   NMM.exclude["TimeManagerClockButton"] = not NMM.doClock
@@ -321,7 +328,7 @@ function NMM:CreateOptionsPanel()
 
   local doClock = p:addCheckBox(L["Also hide/show Clock"], L["Whether the Blizzard clock should also be hidden/shown"])
                     :Place(4, 20)
-  local doNight = p:addCheckBox(L["Also hide/show Day/Night indicator"],
+  local doNight = p:addCheckBox(L["Also hide/show Day/Night (classic) Calendar (BfA) indicator"],
                                 L["Whether the Blizzard Day/Night indicator should also be hidden/shown"]):Place(4, 20)
 
   local doGarrison = p:addCheckBox(L["Also hide/show Mission indicator"],
