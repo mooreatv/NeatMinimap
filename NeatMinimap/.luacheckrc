@@ -9,6 +9,8 @@ globals = {
     "geterrorhandler",
     "C_Timer",
     "GameTooltip",
+    "GetCursorPosition",
+    "Minimap",
 }
 max_line_length = 132
 ignore = {

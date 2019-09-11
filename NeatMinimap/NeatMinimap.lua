@@ -30,18 +30,18 @@ NMM.savedVarName = "NeatMinimapSaved"
 -- Defaults
 NMM.doClock = false
 NMM.doNight = true
-NMM.delay = 2
+NMM.delay = 0.5
 
 NMM.buttons = {}
 
 NMM.buttonsShown = true
 
-function NMM:ShowButtons()
-  if NMM.buttonsShown then
+function NMM:ShowButtons(force)
+  if NMM.buttonsShown and not force then
     NMM:Debug(5, "Already shown buttons")
     return
   end
-  NMM:Debug("Showing buttons")
+  NMM:Debug("Showing buttons - force %", force)
   for _, b in ipairs(NMM.buttons) do
     b:Show()
   end
@@ -49,16 +49,24 @@ function NMM:ShowButtons()
   NMM:CancelCheck("showing buttons")
 end
 
-function NMM:HideButtons()
-  if not NMM.buttonsShown then
+function NMM:HideButtons(force)
+  if not NMM.buttonsShown and not force then
     NMM:Debug(5, "Already hidden buttons")
     return
   end
-  NMM:Debug("Hiding buttons")
+  NMM:Debug("Hiding buttons - force %", force)
   for _, b in ipairs(NMM.buttons) do
     b:Hide()
   end
   NMM.buttonsShown = false
+end
+
+function NMM:ForceUpdate()
+  if NMM:IsCursorInside(NMM.minimapframe) then
+    NMM:ShowButtons(true)
+  else
+    NMM:HideButtons(true)
+  end
 end
 
 function NMM:IsCursorInside(f)
@@ -114,11 +122,36 @@ function NMM:Check()
   NMM:HideButtons()
 end
 
-function NMM:SetupMouseInOut()
-  NMM.buttons = {MinimapZoomOut, MinimapZoomIn}
+NMM.exclude = {
+  ["NeatMinimapFrame"] = true,
+  ["MiniMapMailFrame"] = true,
+  ["MiniMapTrackingFrame"] = true,
+  ["MiniMapBattlefieldFrame"] = true,
+  ["MinimapBorder"] = true,
+  ["MinimapBackdrop"] = true,
+  ["SexyMapCustomBackdrop"] = true,
+  ["SexyMapPingFrame"] = true
+}
+
+function NMM:UpdateButtons()
+  NMM.buttons = {_G.MinimapZoomOut, _G.MinimapZoomIn}
   if NMM.doNight then
-    table.insert(NMM.buttons, GameTimeFrame)
+    table.insert(NMM.buttons, _G.GameTimeFrame)
   end
+  NMM.exclude["TimeManagerClockButton"] = not NMM.doClock
+  for _, b in ipairs({Minimap:GetChildren()}) do
+    local name = b:GetName()
+    if NMM.exclude[name] then
+      self:Debug("Skipping %", name)
+    else
+      self:Debug("Adding %", name)
+      table.insert(NMM.buttons, b)
+    end
+  end
+end
+
+function NMM:SetupMouseInOut()
+  NMM:UpdateButtons()
   local name = "NeatMinimapFrame"
   local f = NMM.minimapframe or NMM:Frame(name, name, nil, Minimap)
   NMM.minimapframe = f
@@ -141,17 +174,7 @@ function NMM:SetupMouseInOut()
   Minimap:HookScript("OnLeave", function()
     NMM:ScheduleNextCheck()
   end)
-  if false then
-    for _, b in ipairs(NMM.buttons) do
-      b:HookScript("OnEnter", function()
-        NMM:ShowButtons()
-      end)
-      b:HookScript("OnLeave", function()
-        NMM:HideButtons()
-      end)
-    end
-  end
-  NMM:ScheduleNextCheck()
+  NMM:ForceUpdate()
 end
 
 -- Events handling
@@ -164,6 +187,10 @@ local additionalEventHandlers = {
     NMM:Debug("OnPlayerEnteringWorld " .. NMM:Dump(...))
     NMM:CreateOptionsPanel()
     NMM:SetupMouseInOut()
+    -- addons might add their buttons after us
+    C_Timer.After(3, function()
+      NMM:SetupMouseInOut()
+    end)
   end,
 
   DISPLAY_SIZE_CHANGED = function(_self)
@@ -258,11 +285,11 @@ function NMM:CreateOptionsPanel()
   local delaySlider = p:addSlider(L["Show delay"], L["How long to show the button after mousing out of the map area"],
                                   0, 3, 0.5, L["No delay"], L["3 sec"], {
     ["0"] = L["none"],
-    ["0.5"] = "1/2 s",
-    [1] = "1 s",
-    ["1.5"] = "1 1/2 s",
-    [2] = "2 s",
-    ["2.5"] = "2 1/2 s"
+    ["0.5"] = L["0.5 s"],
+    [1] = L["1 s"],
+    ["1.5"] = L["1 ½ s"],
+    [2] = L["2 s"],
+    ["2.5"] = L["2 ½ s"]
   }):Place(16, 30)
 
   p:addText(L["Development, troubleshooting and advanced options:"]):Place(40, 20)
