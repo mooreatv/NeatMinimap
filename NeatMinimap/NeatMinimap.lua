@@ -147,7 +147,16 @@ NMM.exclude = {
   ["MMHolder"] = true,
   ["HelpOpenWebTicketButton"] = true,
   ["HelpOpenTicketButton"] = true,
-  ["TopMiniPanel"] = true
+  ["TopMiniPanel"] = true,
+  ["LeftMiniPanel"] = true,
+  ["RightMiniPanel"] = true,
+  ["BottomMiniPanel"] = true,
+  ["TopLeftMiniPanel"] = true,
+  ["TopRightMiniPanel"] = true,
+  ["BottomLeftMiniPanel"] = true,
+  ["BottomRightMiniPanel"] = true,
+  -- Questie 4.1 onward
+  ["QuestieFrameGroup"] = true
 }
 
 function NMM:UpdateButtons()
@@ -176,12 +185,16 @@ function NMM:UpdateButtons()
       self:Debug("Skipping % %", name, b.Hide)
     else
       name = name or b.name
-      if not name and not b.icon then
+      if b.uiMapID then
+        self:Debug(3, "Skipping HereBeDragons pins %", name)
+      elseif b.data and b.data.UiMapID then
+        self:Debug(3, "Skipping Questie/UiMapID pins %", name)
+      elseif b.waypoint then
+        self:Debug(3, "Skipping Zygor/waypoint pins %", name)
+      elseif not name and not b.icon then
         self:Debug("Skipping unamed frame/button")
       elseif name and NMM:StartsWith(name, "QuestieFrame") then
         self:Debug(4, "Skipping QuestieFrames %", name)
-      elseif name and NMM:StartsWith(name, "HandyNotes") then
-        self:Debug(4, "Skipping HandyNotesPins %", name)
       else
         self:Debug("Adding %", name)
         table.insert(NMM.buttons, b)

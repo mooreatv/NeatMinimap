@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.04.00 Sept 11th 2019
+- More generic fix for HereBeDragons based map pins as well as Questie and Zygor
+- Don't try to manage any of the ElvUI MiniPanels as they are managed in /ec DataTexts settings
 v1.03.03 Sept 11th 2019
 - Fixes for ElvUI and BfA showing extra buttons/frames (Fixes #2)
 - Tweaks to options menu
