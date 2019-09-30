@@ -4,6 +4,8 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.04.01 Sept 30th 2019
+- Toc update for 8.2.5 and using Github Actions for auto build/uploads
 v1.04.00 Sept 11th 2019
 - More generic fix for HereBeDragons based map pins as well as Questie and Zygor
 - Don't try to manage any of the ElvUI MiniPanels as they are managed in /ec DataTexts settings
