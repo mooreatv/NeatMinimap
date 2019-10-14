@@ -31,6 +31,7 @@ NMM.savedVarName = "NeatMinimapSaved"
 NMM.doClock = false
 NMM.doNight = true
 NMM.doGarrison = false
+NMM.doTrack = false
 NMM.delay = 0.5
 
 NMM.buttons = {}
@@ -132,7 +133,6 @@ NMM.exclude = {
   ["NeatMinimapFrame"] = true,
   -- Std blizz stuff
   ["MiniMapMailFrame"] = true,
-  ["MiniMapTrackingFrame"] = true,
   ["MiniMapBattlefieldFrame"] = true,
   ["MinimapBorder"] = true,
   ["MinimapBackdrop"] = true,
@@ -179,6 +179,7 @@ function NMM:UpdateButtons()
     NMM.buttons = {}
   end
   NMM.exclude["TimeManagerClockButton"] = not NMM.doClock
+  NMM.exclude["MiniMapTrackingFrame"] = not NMM.doTrack
   for _, b in ipairs({Minimap:GetChildren()}) do
     local name = b:GetName()
     if NMM.exclude[name] or not b.Hide then
@@ -348,6 +349,10 @@ function NMM:CreateOptionsPanel()
                                    L["Whether the Blizzard Garrison/Mission/Faction indicator should also be hidden/shown"])
                        :Place(4, 20)
 
+  local doTrack = p:addCheckBox(L["Also hide/show tracker indicator"],
+                                L["Whether the Tracking (mining/herb/hunter tracking/...) indicator should also be hidden/shown"])
+                    :Place(4, 20)
+
   local delaySlider = p:addSlider(L["Hide delay"],
                                   L["How long to continue to show the button after mousing out of the map area"], 0, 3,
                                   0.5, L["No delay"], L["3 sec"], {
@@ -385,6 +390,7 @@ function NMM:CreateOptionsPanel()
     doClock:SetChecked(NMM.doClock)
     doNight:SetChecked(NMM.doNight)
     doGarrison:SetChecked(NMM.doGarrison)
+    doTrack:SetChecked(NMM.doTrack)
     delaySlider:SetValue(NMM.delay)
     NMM:ShowButtons()
   end
@@ -411,6 +417,7 @@ function NMM:CreateOptionsPanel()
     NMM:SetSaved("doClock", doClock:GetChecked())
     NMM:SetSaved("doNight", doNight:GetChecked())
     NMM:SetSaved("doGarrison", doGarrison:GetChecked())
+    NMM:SetSaved("doTrack", doTrack:GetChecked())
     NMM:SetSaved("delay", delaySlider:GetValue())
     NMM:SetupMouseInOut()
     NMM:ScheduleNextCheck()

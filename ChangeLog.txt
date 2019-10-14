@@ -4,6 +4,8 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.05.00 Oct 14th 2019
+- Implemented request #6: Option to also hide/show the Tracking (mining/herbs/hunter/...)
 v1.04.01 Sept 30th 2019
 - Toc update for 8.2.5 and using Github Actions for auto build/uploads
 v1.04.00 Sept 11th 2019
