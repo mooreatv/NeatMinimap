@@ -6,11 +6,14 @@ Coming next:
 
 v1.05.00 Oct 14th 2019
 - Implemented request #6: Option to also hide/show the Tracking (mining/herbs/hunter/...)
+- Fix for button sometimes stuck in dragging issue (when hiding while dragging) (Issue #9)
+
 v1.04.01 Sept 30th 2019
 - Toc update for 8.2.5 and using Github Actions for auto build/uploads
 v1.04.00 Sept 11th 2019
 - More generic fix for HereBeDragons based map pins as well as Questie and Zygor
 - Don't try to manage any of the ElvUI MiniPanels as they are managed in /ec DataTexts settings
+
 v1.03.03 Sept 11th 2019
 - Fixes for ElvUI and BfA showing extra buttons/frames (Fixes #2)
 - Tweaks to options menu
@@ -23,6 +26,7 @@ v1.03.00 Sept 11th 2019
 - For BfA hide the tracking/search button too
 - Option to hide/show the mission/garrison too
 - Don't hide HandyNote pins
+
 v1.02.02 Sept 11th 2019
 - Fix for my own [!] MoLib button/icons (like PixelPerfectAlign's)
 v1.02.00 Sept 11th 2019

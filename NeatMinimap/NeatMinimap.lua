@@ -60,8 +60,11 @@ function NMM:HideButtons(force)
   end
   NMM:Debug("Hiding buttons - force %", force)
   for _, b in ipairs(NMM.buttons) do
-    if b and b.Hide then
-      pcall(b.Hide, b)
+    if b and b.Hide and b.IsDragging then
+      local ok, r = pcall(b.IsDragging, b)
+      if ok and not r then
+        pcall(b.Hide, b)
+      end
     end
   end
   NMM.buttonsShown = false
