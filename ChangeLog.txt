@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.06.00 Dec 10th 2019
+- Updated for Classic 1.13.3
+
 v1.05.00 Oct 14th 2019
 - Implemented request #6: Option to also hide/show the Tracking (mining/herbs/hunter/...)
 - Fix for button sometimes stuck in dragging issue (when hiding while dragging) (Issue #9)
