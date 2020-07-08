@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.06.02 July 8th 2020
+- Updated for Classic 1.13.5
+
 v1.06.01 Feb 24th 2020
 - Updated for BfA 8.3
 
