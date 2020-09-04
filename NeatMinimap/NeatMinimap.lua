@@ -159,7 +159,9 @@ NMM.exclude = {
   ["BottomLeftMiniPanel"] = true,
   ["BottomRightMiniPanel"] = true,
   -- Questie 4.1 onward
-  ["QuestieFrameGroup"] = true
+  ["QuestieFrameGroup"] = true,
+  -- ElvUI
+  ["MinimapPanel"] = true
 }
 
 function NMM:UpdateButtons()
