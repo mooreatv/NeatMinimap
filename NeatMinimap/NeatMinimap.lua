@@ -158,6 +158,7 @@ NMM.exclude = {
   ["TopRightMiniPanel"] = true,
   ["BottomLeftMiniPanel"] = true,
   ["BottomRightMiniPanel"] = true,
+  ["MinimapPanel"] = true,
   -- Questie 4.1 onward
   ["QuestieFrameGroup"] = true
 }
