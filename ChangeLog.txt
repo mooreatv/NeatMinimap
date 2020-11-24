@@ -4,8 +4,12 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.07.01 Nov 24th 2020
+- Updated for Shadowlands (toc 90002)
+- Fixed Issue #14
+
 v1.07.00 Oct 13th 2020
-- Updated for Shadowland prepatch 9.0.1 (toc 90001)
+- Updated for Shadowlands prepatch 9.0.1 (toc 90001)
 
 v1.06.02 July 8th 2020
 - Updated for Classic 1.13.5
