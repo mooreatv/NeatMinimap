@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.07.02 Nov 24th 2020
+- Fix for Blizzard checkbox template SetValue bug - pulled from MoLib
+
 v1.07.01 Nov 24th 2020
 - Updated for Shadowlands (toc 90002)
 - Fixed Issue #14
