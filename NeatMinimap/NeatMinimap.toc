@@ -2,7 +2,7 @@
 ## Interface: 90002
 #@end-retail@
 #@non-retail@
-# ## Interface: 11305
+# ## Interface: 11306
 #@end-non-retail@
 ## Title: Neat Minimap
 ## Notes: Neat Minimap auto hides/shows buttons and clutter as needed (|cFF99E5FF/nmm|r)
@@ -13,6 +13,10 @@
 ## SavedVariables: NeatMinimapSaved
 ## OptionalDeps: SexyMap, ElvUI
 ## Globe: check-classic
+## X-OpenSource-License: LPGLv3
+## X-OpenSource-Releases: https://github.com/mooreatv/NeatMinimap/releases
+## X-Curse-Project-ID: 341067
+## X-WoWI-ID: 25284
 MoLib/MoLib.lua
 MoLib/MoLibUI.lua
 NeatMinimap.lua

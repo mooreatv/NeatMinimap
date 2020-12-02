@@ -4,6 +4,10 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.07.03 Dec 1st 2020
+- Bump for Classic 1.13.6
+- Added info in TOC for other addon managers
+
 v1.07.02 Nov 24th 2020
 - Fix for Blizzard checkbox template SetValue bug - pulled from MoLib
 
