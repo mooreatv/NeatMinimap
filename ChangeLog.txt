@@ -4,6 +4,10 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.07.04 March 9th 2021
+- Fixed classic packager version
+- TOC update for Shadowlands 9.0.5
+
 v1.07.03 Dec 1st 2020
 - Bump for Classic 1.13.6
 - Added info in TOC for other addon managers
