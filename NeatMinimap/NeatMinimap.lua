@@ -182,11 +182,11 @@ function NMM:UpdateButtons()
     self:Debug("ElvUI case, we'll start with fewer managed buttons")
     NMM.buttons = {}
   end
-  if NMM.square then
-    NMM.exclude["MinimapBorder"] = false
-    NMM.exclude["MinimapBackdrop"] = false
-    Minimap:SetMaskTexture("")
-  end
+--  if NMM.square then
+--    NMM.exclude["MinimapBorder"] = false
+--    NMM.exclude["MinimapBackdrop"] = false
+--    Minimap:SetMaskTexture("")
+--  end
   NMM.exclude["TimeManagerClockButton"] = not NMM.doClock
   NMM.exclude["MiniMapTrackingFrame"] = not NMM.doTrack
   for _, b in ipairs({Minimap:GetChildren()}) do
@@ -349,8 +349,8 @@ function NMM:CreateOptionsPanel()
   p:addText(L["These options let you control the behavior of NeatMinimap"] .. " " .. NMM.manifestVersion ..
               " @project-abbreviated-hash@"):Place()
 
-  local makeSquare = p:addCheckBox(L["Make the minimap square"], L["Experimental minimalistic square version"])
-                    :Place(4, 20)
+--  local makeSquare = p:addCheckBox(L["Make the minimap square"], L["Experimental minimalistic square version"])
+--                    :Place(4, 20)
 
   local doClock = p:addCheckBox(L["Also hide/show Clock"], L["Whether the Blizzard clock should also be hidden/shown"])
                     :Place(4, 20)
@@ -404,7 +404,7 @@ function NMM:CreateOptionsPanel()
     doGarrison:SetChecked(NMM.doGarrison)
     doTrack:SetChecked(NMM.doTrack)
     delaySlider:SetValue(NMM.delay)
-    makeSquare:SetValue(NMM.square)
+--    makeSquare:SetValue(NMM.square)
     NMM:ShowButtons()
   end
 
@@ -432,7 +432,7 @@ function NMM:CreateOptionsPanel()
     NMM:SetSaved("doGarrison", doGarrison:GetChecked())
     NMM:SetSaved("doTrack", doTrack:GetChecked())
     NMM:SetSaved("delay", delaySlider:GetValue())
-    NMM:SetSaved("square", makeSquare:GetChecked())
+--    NMM:SetSaved("square", makeSquare:GetChecked())
     NMM:SetupMouseInOut()
     NMM:ScheduleNextCheck()
   end

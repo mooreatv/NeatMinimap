@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.07.06 May 10th 2021
+- Remove square minimap experimental feature UI as it doesn't work
+
 v1.07.05 April 21st 2021
 - Classic is now 1.13.7
 
