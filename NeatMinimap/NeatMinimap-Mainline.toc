@@ -1,6 +1,7 @@
-## Interface: 90005
+## Interface: 90100
 ## Title: Neat Minimap
-## Notes: Neat Minimap auto hides/shows buttons and clutter as needed (|cFF99E5FF/nmm|r) - Shadowlands edition
+## Notes: Neat Minimap auto hides/shows buttons and clutter as needed (|cFF99E5FF/nmm|r)
+## Notes: Shadowlands Chains of Domination edition
 ## Author: MooreaTV moorea@ymail.com
 ## Version: @project-version@
 ## DefaultState: Enabled

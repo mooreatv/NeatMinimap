@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.08.01 June 29th 2021
+- Update for Shadowlands Chains of Domination TOC (90100)
+
 v1.08.00 May 10th 2021
 - Burning Crusade Classic multi TOCs compatibility
 
