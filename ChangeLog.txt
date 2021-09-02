@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.08.02 Sept 2nd 2021
+- BCC is now 2.5.2
+
 v1.08.01 June 29th 2021
 - Update for Shadowlands Chains of Domination TOC (90100)
 
