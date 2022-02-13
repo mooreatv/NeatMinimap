@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.09.00 Feb 12th 2022
+- Single zip build + wago + TOC updates
+
 v1.08.02 Sept 2nd 2021
 - BCC is now 2.5.2
 

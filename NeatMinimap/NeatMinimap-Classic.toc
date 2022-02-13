@@ -1,7 +1,7 @@
-## Interface: 11307
+## Interface: 11402
 ## Title: Neat Minimap
 ## Notes: Neat Minimap auto hides/shows buttons and clutter as needed (|cFF99E5FF/nmm|r)
-## Notes: Classic (era) edition
+## Notes: Classic (Era and SoM) edition
 ## Author: MooreaTV moorea@ymail.com
 ## Version: @project-version@
 ## DefaultState: Enabled
@@ -13,6 +13,7 @@
 ## X-OpenSource-Releases: https://github.com/mooreatv/NeatMinimap/releases
 ## X-Curse-Project-ID: 341067
 ## X-WoWI-ID: 25284
+## X-Wago-ID: 9rN47yGD
 MoLib/MoLib.lua
 MoLib/MoLibUI.lua
 NeatMinimap.lua
