@@ -21,21 +21,12 @@ jobs:
           exec /home/runner/.luarocks/bin/luacheck NeatMinimap/ --no-color --config ./NeatMinimap/.luacheckrc -q
       - name: Get the packager
         run: |
-          curl -s https://raw.githubusercontent.com/mooreatv/packager/master/release.sh > ./release.sh
+          curl -s https://raw.githubusercontent.com/mooreatv/packager/v2m/release.sh > ./release.sh
           chmod 755 ./release.sh
-      - name: Create Classic Package
-        run: ./release.sh -g 1.13.7 -m pkgmeta.yaml -p 341067 -w 25284
+      - name: Create Multitoc Package
+        run: ./release.sh -m pkgmeta.yaml
         env:
          CF_API_KEY: ${{ secrets.CF_API_KEY }}
          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
-      - name: Create BfA Package
-        run: ./release.sh -m pkgmeta.yaml -p 341067 -w 25284
-        env:
-         CF_API_KEY: ${{ secrets.CF_API_KEY }}
-         GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
-         WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
-      - uses: actions/upload-artifact@master
-        with:
-          name: NeatMinimap-Build-${{ github.sha }}
-          path: .release/
+         WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
