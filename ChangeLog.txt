@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.09.03 March 26th 2022
+- Burning Crusade 2.5.4 update
+
 v1.09.02 Feb 22nd 2022
 - Eternity's End update (9.2.0), also updated packager again to latest community packager (v2)
 
