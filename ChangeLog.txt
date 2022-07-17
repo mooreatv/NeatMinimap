@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.10.00 July 17th 2022
+- Added Wrath of the Lich King classic
+
 v1.09.05 June 4th 2022
 - Updated for Classic Era 1.14.3 and ShadowLands 9.2.5
 
