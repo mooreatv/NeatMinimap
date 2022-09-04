@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.10.02 Sept 4th 2022
+- SL is 9.2.7 + pickup latest MoLib for Wrath
+
 v1.10.01 July 17th 2022
 - Added Wrath of the Lich King classic
 
