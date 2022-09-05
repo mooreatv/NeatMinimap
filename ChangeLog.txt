@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.10.03 Sept 5th 2022
+- Pick up fix in MoLib for missing BC constant
+
 v1.10.02 Sept 4th 2022
 - SL is 9.2.7 + pickup latest MoLib for Wrath
 
