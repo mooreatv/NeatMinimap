@@ -1,4 +1,4 @@
-## Interface: 30400
+## Interface: 30402
 ## Title: Neat Minimap
 ## Notes: Neat Minimap auto hides/shows buttons and clutter as needed (|cFF99E5FF/nmm|r)
 ## Notes: Wrath of the Lich King Classic Edition
