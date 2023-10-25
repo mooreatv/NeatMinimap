@@ -4,6 +4,9 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+v1.10.06 Oct 24th 2023
+- Wrath is now 3.4.3
+
 v1.10.05 August 22nd 2023
 - Classic is now 1.14.4
 
