@@ -4,6 +4,8 @@ Coming next:
 - Your input/suggestions welcome !
 - See open issues for ideas https://github.com/mooreatv/NeatMinimap/issues
 
+From April 2024 using just automated changelog to have one less file to edit when the TOC is updated.
+
 v1.10.07 Nov 18th 2023
 - Classic is now 1.15.0
 - Dragonflight is 10.2.0
