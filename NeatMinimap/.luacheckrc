@@ -1,9 +1,6 @@
 globals = {
     "NeatMinimapSaved",
     "CreateFrame",
-    "InterfaceOptions_AddCategory",
-    "InterfaceOptionsFrame",
-    "InterfaceOptionsFrame_OpenToCategory",
     "SlashCmdList",
     "SLASH_NeatMinimap_Slash_Command1",
     "geterrorhandler",

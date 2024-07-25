@@ -307,9 +307,7 @@ function NMM.Slash(arg) -- can't be a : because used directly as slash command
                        " (@project-abbreviated-hash@) by MooreaTv (moorea@ymail.com)")
   elseif cmd == "c" then
     -- Show config panel
-    -- InterfaceOptionsList_DisplayPanel(NMM.optionsPanel)
-    InterfaceOptionsFrame:Show() -- onshow will clear the category if not already displayed
-    InterfaceOptionsFrame_OpenToCategory(NMM.optionsPanel) -- gets our name selected
+    NMM:ShowConfigPanel(NMM.optionsPanel)
   elseif NMM:StartsWith(arg, "debug") then
     -- debug
     if rest == "on" then
@@ -454,7 +452,7 @@ function NMM:CreateOptionsPanel()
     end
   end
   -- Add the panel to the Interface Options
-  InterfaceOptions_AddCategory(NMM.optionsPanel)
+  NMM:ConfigPanel(NMM.optionsPanel)
 end
 
 -- NMM.debug = 2
