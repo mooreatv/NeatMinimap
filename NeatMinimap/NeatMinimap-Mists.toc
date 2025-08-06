@@ -1,7 +1,7 @@
-## Interface: 20504
+## Interface: 50500
 ## Title: Neat Minimap
 ## Notes: Neat Minimap auto hides/shows buttons and clutter as needed (|cFF99E5FF/nmm|r)
-## Notes: Burning Crusade edition
+## Notes: MoP Classic Edition
 ## Author: MooreaTV moorea@ymail.com
 ## Version: @project-version@
 ## DefaultState: Enabled
