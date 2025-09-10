@@ -1,4 +1,5 @@
-local addon, _ns = ... --[[
+local addon, _ns = ...
+local NMM = _G[addon] --[[
    NeatMinimap by MooreaTV moorea@ymail.com (c) 2019 All rights reserved
    Licensed under LGPLv3 - No Warranty
    (contact the author if you need a different license)
@@ -10,8 +11,7 @@ local addon, _ns = ... --[[
    (and the MoLib library at https://github.com/mooreatv/MoLib)
 
    Releases detail/changes are on https://github.com/mooreatv/NeatMinimap/releases
-   ]] -- -- -- our name, our empty default (and unused) anonymous ns
-local NMM = _G[addon] -- Table and base functions created by MoLib
+   ]] -- -- -- our name, our empty default (and unused) anonymous ns -- Table and base functions created by MoLib
 NMM.L = NMM:GetLocalization() -- localization
 local L = NMM.L
 NMM.slashCmdName = "nmm" -- NMM.debug = 9 -- to debug before saved variables are loaded
