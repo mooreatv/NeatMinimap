@@ -1,21 +1,22 @@
-local addon, _ns = ...
-local NMM = _G[addon] --[[
-   NeatMinimap by MooreaTV moorea@ymail.com (c) 2019 All rights reserved
-   Licensed under LGPLv3 - No Warranty
-   (contact the author if you need a different license)
+local addon, _ns = ... -- Put your Lua here
+--[[
+   NeatMinimap by MooreaTV moorea@ymail.com (c) 2019 All rights reserved
+   Licensed under LGPLv3 - No Warranty
+   (contact the author if you need a different license)
 
-   Neat Minimap auto hides/shows buttons and clutter as needed
+   Neat Minimap auto hides/shows buttons and clutter as needed
 
-   Get this addon binary release using curse/twitch client or on wowinterface
-   The source of the addon resides on https://github.com/mooreatv/NeatMinimap
-   (and the MoLib library at https://github.com/mooreatv/MoLib)
+   Get this addon binary release using curse/twitch client or on wowinterface
+   The source of the addon resides on https://github.com/mooreatv/NeatMinimap
+   (and the MoLib library at https://github.com/mooreatv/MoLib)
 
-   Releases detail/changes are on https://github.com/mooreatv/NeatMinimap/releases
-   ]] -- -- -- our name, our empty default (and unused) anonymous ns -- Table and base functions created by MoLib
+   Releases detail/changes are on https://github.com/mooreatv/NeatMinimap/releases
+   ]] -- -- -- our name, our empty default (and unused) anonymous ns
+local NMM = _G[addon] -- Table and base functions created by MoLib
 NMM.L = NMM:GetLocalization() -- localization
 local L = NMM.L
 NMM.slashCmdName = "nmm" -- NMM.debug = 9 -- to debug before saved variables are loaded
-NMM.addonHash = "6653948"
+NMM.addonHash = "@project-abbreviated-hash@"
 NMM.savedVarName = "NeatMinimapSaved"
 NMM.doClock = false -- Defaults
 NMM.doNight = true
@@ -34,7 +35,7 @@ function NMM:ShowButtons(force)
     NMM:Debug("Showing buttons - force %", force)
     for _, b in ipairs(NMM.buttons) do
         if b and b.Show then
-            UIFrameFadeIn(b, NMM.fadeDuration, b:GetAlpha() or 0, 1) -- Replaced pcall(b.Show, b) with a fade-in effect
+            UIFrameFadeIn(b, NMM.fadeDuration, b:GetAlpha() or 0, 1) -- Replaced pcall(b.Show, b) with a fade-in effect -- Fades from 0 to 1 over 0.25 seconds
         end
     end
 
@@ -53,7 +54,7 @@ function NMM:HideButtons(force)
         if b and b.Hide and b.IsDragging then
             local ok, r = pcall(b.IsDragging, b)
             if ok and not r then
-                UIFrameFadeOut(b, NMM.fadeDuration, b:GetAlpha() or 1, 0) -- Replaced pcall(b.Hide, b) with a fade-out effect
+                UIFrameFadeOut(b, NMM.fadeDuration, b:GetAlpha() or 1, 0) -- Replaced pcall(b.Hide, b) with a fade-out effect -- Fades from its current alpha to 0 over 0.25 seconds
             end
         end
     end
@@ -167,7 +168,7 @@ function NMM:UpdateButtons()
         NMM.buttons = {}
     end
 
-    NMM.exclude["TimeManagerClockButton"] = not NMM.doClock --  if NMM.square then --    NMM.exclude["MinimapBorder"] = false --    NMM.exclude["MinimapBackdrop"] = false --    Minimap:SetMaskTexture("") --  end
+    NMM.exclude["TimeManagerClockButton"] = not NMM.doClock --  if NMM.square then --    NMM.exclude["MinimapBorder"] = false --    NMM.exclude["MinimapBackdrop"] = false --    Minimap:SetMaskTexture("") --  end
     NMM.exclude["MiniMapTrackingFrame"] = not NMM.doTrack
     for _, b in ipairs({Minimap:GetChildren()}) do
         local name = b:GetName()
@@ -259,9 +260,9 @@ function NMM.Slash(arg) -- can't be a : because used directly as slash command
     if cmd == "b" then
         local subText = L["Please submit on discord or on curse or github or email"]
         NMM:PrintDefault(L["NeatMinimap bug report open: "] .. subText)
-        NMM:BugReport(subText, "6653948\n\n" .. L["Bug report from slash command"]) -- base molib will add version and date/timne
+        NMM:BugReport(subText, "@project-abbreviated-hash@\n\n" .. L["Bug report from slash command"]) -- base molib will add version and date/timne
     elseif cmd == "v" then
-        NMM:PrintDefault("NeatMinimap " .. NMM.manifestVersion .. " (6653948) by MooreaTv (moorea@ymail.com)") -- version
+        NMM:PrintDefault("NeatMinimap " .. NMM.manifestVersion .. " (@project-abbreviated-hash@) by MooreaTv (moorea@ymail.com)") -- version
     elseif cmd == "c" then
         NMM:ShowConfigPanel(NMM.optionsPanel) -- Show config panel
     elseif NMM:StartsWith(arg, "debug") then
@@ -292,8 +293,8 @@ function NMM:CreateOptionsPanel() -- Options panel
     NMM.optionsPanel = p
     p:addText(L["NeatMinimap options"], "GameFontNormalLarge"):Place()
     p:addText(L["Neat Minimap auto hides/shows buttons and clutter as needed"]):Place()
-    p:addText(L["These options let you control the behavior of NeatMinimap"] .. " " .. NMM.manifestVersion .. " 6653948"):Place()
-    local doClock = p:addCheckBox(L["Also hide/show Clock"], L["Whether the Blizzard clock should also be hidden/shown"]):Place(4, 20) --  local makeSquare = p:addCheckBox(L["Make the minimap square"], L["Experimental minimalistic square version"]) --                    :Place(4, 20)
+    p:addText(L["These options let you control the behavior of NeatMinimap"] .. " " .. NMM.manifestVersion .. " @project-abbreviated-hash@"):Place()
+    local doClock = p:addCheckBox(L["Also hide/show Clock"], L["Whether the Blizzard clock should also be hidden/shown"]):Place(4, 20) --  local makeSquare = p:addCheckBox(L["Make the minimap square"], L["Experimental minimalistic square version"]) --                    :Place(4, 20)
     local doNight = p:addCheckBox(L["Also hide/show Day/Night (classic) Calendar (BfA) indicator"], L["Whether the Blizzard Day/Night indicator should also be hidden/shown"]):Place(4, 20)
     local doGarrison = p:addCheckBox(L["Also hide/show Mission indicator"], L["Whether the Blizzard Garrison/Mission/Faction indicator should also be hidden/shown"]):Place(4, 20)
     local doTrack = p:addCheckBox(L["Also hide/show tracker indicator"], L["Whether the Tracking (mining/herb/hunter tracking/...) indicator should also be hidden/shown"]):Place(4, 20)
@@ -306,7 +307,7 @@ function NMM:CreateOptionsPanel() -- Options panel
         ["2.5"] = L["2 ½ s"]
     }):Place(16, 30)
 
-    local fadeSlider = p:addSlider(L["Fade duration"], L["How long the fade-in and fade-out effects should last"], 0.1, 1.0, 0.25, L["Fast"], L["Slow"], {
+    local fadeSlider = p:addSlider(L["Fade duration"], L["How long the fade-in and fade-out effects should last"], 0.1, 1.0, 0.1, L["Fast"], L["Slow"], {
         ["0.1"] = L["0.1 s"],
         ["0.25"] = L["0.25 s"],
         ["0.5"] = L["0.5 s"],
@@ -330,19 +331,19 @@ function NMM:CreateOptionsPanel() -- Options panel
 
     function p:HandleRefresh()
         p:Init()
+        fadeSlider:SetValue(NMM.fadeDuration)
         debugLevel:SetValue(NMM.debug or 0)
         doClock:SetChecked(NMM.doClock)
         doNight:SetChecked(NMM.doNight)
         doGarrison:SetChecked(NMM.doGarrison)
         doTrack:SetChecked(NMM.doTrack)
         delaySlider:SetValue(NMM.delay)
-        fadeSlider:SetValue(NMM.fadeDuration)
-        NMM:ShowButtons() --    makeSquare:SetValue(NMM.square)
+        NMM:ShowButtons() --    makeSquare:SetValue(NMM.square)
     end
 
     function p:HandleOk()
         NMM:Debug(1, "NMM.optionsPanel.okay() internal")
-        local sliderVal = debugLevel:GetValue() --    local changes = 0 --    changes = changes + NMM:SetSaved("lineLength", lineLengthSlider:GetValue()) --    if changes > 0 then --      NMM:PrintDefault("NMM: % change(s) made to grid config", changes) --    end
+        local sliderVal = debugLevel:GetValue() --    local changes = 0 --    changes = changes + NMM:SetSaved("lineLength", lineLengthSlider:GetValue()) --    if changes > 0 then --      NMM:PrintDefault("NMM: % change(s) made to grid config", changes) --    end
         if sliderVal == 0 then
             sliderVal = nil
             if NMM.debug then NMM:PrintDefault("NeatMinimap: options setting debug level changed from % to OFF.", NMM.debug) end
@@ -357,7 +358,7 @@ function NMM:CreateOptionsPanel() -- Options panel
         NMM:SetSaved("doTrack", doTrack:GetChecked())
         NMM:SetSaved("delay", delaySlider:GetValue())
         NMM:SetSaved("fadeDuration", fadeSlider:GetValue())
-        NMM:SetupMouseInOut() --    NMM:SetSaved("square", makeSquare:GetChecked())
+        NMM:SetupMouseInOut() --    NMM:SetSaved("square", makeSquare:GetChecked())
         NMM:ScheduleNextCheck()
     end
 
